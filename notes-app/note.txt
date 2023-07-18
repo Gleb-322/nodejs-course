@@ -1,5 +1,0 @@
-This file is created by Node.js
-Add new text in file with appendFileSync method help
-Add new text in file with appendFileSync method help
-Add new text in file with appendFileSync method help
-Add new text in file with appendFileSync method help

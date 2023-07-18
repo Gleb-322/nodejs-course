@@ -1,3 +1,0 @@
-
-Add new text in file with appendFileSync method help
-Add new text in file with appendFileSync method help 2

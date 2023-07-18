@@ -1,7 +1,7 @@
-const fs = require('fs')
+const validator = require('validator')
+const getNotes = require('./notes')
 
-const fileName = 'notes.txt'
-const fileData = 'Add new text in file with appendFileSync method help 2'
+const notes = getNotes()
 
-// fs.writeFileSync(fileName, 'This file is created by Node.js')
-fs.appendFileSync(fileName, `\n${fileData}`)
+console.log(notes)
+console.log(validator.isEmail('foo@bar.com'))
