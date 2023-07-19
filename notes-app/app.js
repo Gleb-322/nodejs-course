@@ -1,12 +1,47 @@
-const validator = require('validator')
-const chalk = require('chalk')
-const getNotes = require('./notes')
+const yargs = require('yargs')
 
-const notes = getNotes()
+yargs.command({
+	command: 'add',
+	describe: 'Add a note',
+	builder: {
+		title: {
+			discribe: 'Title note',
+			demandOption: true,
+			type: 'string',
+		},
+		body: {
+			discribe: 'Body note',
+			demandOption: true,
+			type: 'string',
+		},
+	},
+	handler: () => {
+		console.log(`Title: ${yargs.argv.title}\nBody: ${yargs.argv.body}`)
+	},
+})
 
-console.log(notes)
-console.log(validator.isEmail('foo@bar.com'))
+yargs.command({
+	command: 'remove',
+	describe: 'Remove a note',
+	handler: () => {
+		console.log('Removing a note...')
+	},
+})
 
-console.log(chalk.inverse.bold.green('Success'))
-console.log(chalk.inverse.underline.yellow('Warning'))
-console.log(chalk.dim.inverse.strikethrough.red('Error'))
+yargs.command({
+	command: 'list',
+	describe: 'Show list of notes',
+	handler: () => {
+		console.log('Showing list of notes...')
+	},
+})
+
+yargs.command({
+	command: 'read',
+	describe: 'Read selected note',
+	handler: () => {
+		console.log('Open selected note to read it...')
+	},
+})
+
+yargs.parse()
