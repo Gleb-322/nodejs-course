@@ -21,6 +21,16 @@ footer {
 	padding: 16px 0;
 }
 
+.title,
+.forecast {
+	color: #888888;
+	margin-bottom: 5px;
+}
+
+.error {
+	color: red;
+}
+
 header {
 	margin-top: 16px;
 	margin-bottom: 48px;
@@ -39,4 +49,17 @@ header a {
 
 .portrait {
 	width: 250px;
+}
+
+input {
+	border: 1px solid #cccccc;
+	padding: 8px;
+}
+
+button {
+	cursor: pointer;
+	border: 1px solid #888888;
+	background: #888888;
+	color: white;
+	padding: 8px;
 }
