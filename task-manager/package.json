@@ -1,8 +1,8 @@
 {
-  "name": "weather-app",
+  "name": "task-manager",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,9 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "request": "^2.88.2"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
+    "mongodb": "^5.7.0"
   }
 }
