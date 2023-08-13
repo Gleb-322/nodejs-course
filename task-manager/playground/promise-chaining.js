@@ -1,5 +1,5 @@
-// require('../src/db/mongoose')
-// const User = require('../src/models/user')
+require('../src/db/mongoose')
+const User = require('../src/models/user')
 
 // User.findByIdAndUpdate('5c1a5a34d5a2ec046ca8f6bc', { age: 1 })
 // 	.then(user => {
@@ -12,3 +12,12 @@
 // 	.catch(e => {
 // 		console.log(e)
 // 	})
+
+const updateOneAndCount = async (id, age) => {
+	await User.findByIdAndUpdate(id, { age })
+	return await User.countDocuments({ age })
+}
+
+updateOneAndCount('64d7870614dcee78711dc54e', 20)
+	.then(count => console.log(count))
+	.catch(e => console.log(e))
