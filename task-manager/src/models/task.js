@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const shemaTask = {
+const shemaTask = mongoose.Schema({
 	description: {
 		type: String,
 		required: true,
@@ -10,7 +10,7 @@ const shemaTask = {
 		type: Boolean,
 		default: false,
 	},
-}
+})
 
 const Task = mongoose.model('Task', shemaTask)
 
