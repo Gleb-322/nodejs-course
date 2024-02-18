@@ -2,6 +2,7 @@ const validator = require('validator')
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Task = require('./task')
 
 const shemaUser = new mongoose.Schema({
 	name: {
@@ -52,6 +53,24 @@ const shemaUser = new mongoose.Schema({
 	],
 })
 
+shemaUser.virtual('tasks', {
+	ref: 'Task',
+	localField: '_id',
+	foreignField: 'owner',
+})
+
+// Hiding private date
+
+shemaUser.methods.toJSON = function () {
+	const user = this
+	const userObject = user.toObject()
+	delete userObject.password
+	delete userObject.tokens
+	return userObject
+}
+
+// Generate tokens
+
 shemaUser.methods.generateAuthToken = async function () {
 	const user = this
 	const token = jwt.sign({ _id: user._id.toString() }, 'secret')
@@ -59,6 +78,8 @@ shemaUser.methods.generateAuthToken = async function () {
 	await user.save()
 	return token
 }
+
+// Login functional
 
 shemaUser.statics.findByCredentials = async (email, password) => {
 	const user = await User.findOne({ email })
@@ -74,6 +95,7 @@ shemaUser.statics.findByCredentials = async (email, password) => {
 	return user
 }
 
+// Hashing password
 shemaUser.pre('save', async function (next) {
 	const user = this
 
@@ -83,6 +105,18 @@ shemaUser.pre('save', async function (next) {
 
 	next()
 })
+
+// Delete tasks when user is removed
+
+shemaUser.pre(
+	'deleteOne',
+	{ document: true, query: false },
+	async function (next) {
+		const user = this
+		await Task.deleteMany({ owner: user._id })
+		next()
+	}
+)
 
 const User = mongoose.model('User', shemaUser)
 
